@@ -37,13 +37,13 @@ main_config = {  # basic config for all plotly's graphs
 }
 
 # ========== Dataset ETL ============ #
-df_gas = pd.read_csv(r"C:\Users\lucas\OneDrive\Documentos\Python Scripts\_Portifolio_projetos\Projeto_GasPriceBR\data\combustiveis-estados.csv")
+df_gas = pd.read_csv("src/data/combustiveis-estados.csv")
 df_gas =df_gas.apply(lambda x: x.replace({
     'NORTE':'NORTH','SUL':'SOUTH','NORDESTE':'NORTHEAST',
     'SUDESTE':'SOUTHEAST','CENTRO OESTE':'MIDWEST' 
 },regex = True))
 
-df_min_wage = pd.read_excel(r"C:\Users\lucas\OneDrive\Documentos\Python Scripts\_Portifolio_projetos\Projeto_GasPriceBR\data\Min_Wage_BR.xlsx")
+df_min_wage = pd.read_excel("src/data/Min_Wage_BR.xlsx")
 
 df_gas = df_gas[['referencia','ano','mes','regiao','estado',
                 'gasolina_comum_preco_revenda_avg',
