@@ -4,6 +4,7 @@ from dash import html,dcc,Input,Output,State
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
+import os
 from dash_bootstrap_templates import ThemeSwitchAIO
 
 # ========= App ============== #
@@ -38,14 +39,17 @@ main_config = {  # basic config for all plotly's graphs
 
 # ========== Dataset ETL ============ #
 
-df_gas = pd.read_csv(r"C:\Users\lucas\OneDrive\Documentos\Python Scripts\_Portifolio_projetos\Projeto_GasPriceBR\src\data\combustiveis-estados.csv")
+base_path = os.path.dirname(__file__)
+file_path_gas = os.path.join(base_path, 'data/combustiveis-estados.csv')
+df_gas = pd.read_csv(file_path_gas)
 
 df_gas =df_gas.apply(lambda x: x.replace({
     'NORTE':'NORTH','SUL':'SOUTH','NORDESTE':'NORTHEAST',
     'SUDESTE':'SOUTHEAST','CENTRO OESTE':'MIDWEST' 
 },regex = True))
 
-df_min_wage = pd.read_excel(r"C:\Users\lucas\OneDrive\Documentos\Python Scripts\_Portifolio_projetos\Projeto_GasPriceBR\src\data\Min_Wage_BR.xlsx")
+file_path_wage = os.path.join(base_path, 'data/Min_Wage_BR.xlsx')
+df_min_wage = pd.read_excel(file_path_wage)
 
 df_gas = df_gas[['referencia','ano','mes','regiao','estado',
                 'gasolina_comum_preco_revenda_avg',
